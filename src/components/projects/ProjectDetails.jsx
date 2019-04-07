@@ -1,4 +1,5 @@
 import React from 'react';
+import AddTask from './tasks/AddTask';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
@@ -19,9 +20,10 @@ const ProjectDetails = (props) => {
             <div>Posted by: {project.authorFirstName} {project.authorLastName}</div>
             <div>{moment(project.createdAt.toDate()).calendar()}</div>
         </div>
+        <AddTask project={project}/>
     </div>
   }
-    return <div></div> 
+    return <div/>
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -36,7 +38,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([
-    {collection: 'projects'}
-  ])
+  firestoreConnect([{collection: 'projects'}])
 )(ProjectDetails)

@@ -11,6 +11,9 @@ import { reduxFirestore, getFirestore } from 'redux-firestore';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import firebaseConfig from './config/firebaseConfig';
 
+/**
+ * The redux store. Used to store the state of the application.
+ */
 const store = createStore(
     rootReducer, 
     compose(
@@ -20,11 +23,13 @@ const store = createStore(
             useFirestoreForProfile: true,
             userProfile: 'users',
             attachAuthIsReady: true
-        })
+        }),
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )
     
 );
 
+/**Renders the webpage after the user is authorized */
 store.firebaseAuthIsReady.then(() => {
     ReactDOM.render(
         <Provider store={store}><App /></Provider>, 

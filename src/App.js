@@ -7,6 +7,7 @@ import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
 import CreateProject from './components/projects/CreateProject';
 
+/**The main Application. Holds all of the pages and their routes here. */
 class App extends Component {
   render() {
     return (

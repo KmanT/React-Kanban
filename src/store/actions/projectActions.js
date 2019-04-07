@@ -20,3 +20,30 @@ export const createProject = (project) => {
         
     }
 }
+
+export const addTask = (state) => {
+    return (dispatch, getState, { getFirebase, getFirestore}) => {
+        const firestore = getFirestore();
+        const profile = getState().firebase.profile;
+        //const project = getState().firebase.project;
+        console.log(state.project);
+        const authorId = getState().firebase.auth.uid;
+        firestore.collection('projects')
+        .doc(state.project.id)
+        .update({
+            tasks: firestore.FieldValue.arrayUnion({
+                title: state.title,
+                content: state.content,
+                authorFirstName: profile.firstName,
+                authorLastName: profile.lastName,
+                authorId: authorId,
+                createdAt: new Date(),
+                status: 0
+            })
+        }).then(() => {
+            dispatch({type: 'ADD_TASK', payload: state})
+        }).catch((err) => {
+            dispatch({type: 'ADD_TASK_ERROR', payload: err})
+        })
+    }
+}

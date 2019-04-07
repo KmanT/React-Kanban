@@ -1,5 +1,9 @@
 const initState = {};
 
+/**If you notice the spread operator '...' after state, this means it unpacks
+ * the current state on refresh. When it's just a normal 'state', then it
+ * returns the state to a blank object.
+ */
 const authReducer = (state = initState, action) => {
     switch(action.type) {
         case 'LOGIN_ERROR':

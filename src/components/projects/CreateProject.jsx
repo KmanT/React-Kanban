@@ -6,7 +6,8 @@ import { Redirect } from 'react-router-dom';
 class CreateProject extends Component {
     state = {
         title: '',
-        content: ''
+        content: '',
+        tasks: []
     }
 
     handleChange = (e) => {

@@ -1,8 +1,6 @@
 const initState = {
     projects: [
-        {id: '1', title: 'Finish 443 Project', content: 'Work with team actually get this shit done'},
-        {id: '2', title: 'Finish 371 Project', content: 'Work with team to contribute'},
-        {id: '3', title: 'Finish Personal Branding Paper', content: 'Create a paper based on myself and the concepts of marketing over the course of the semester'}
+        
     ]
 };
 
@@ -13,6 +11,12 @@ const projectReducer = (state = initState, action) => {
             return state;
         case 'CREATE_PROJECT_ERROR':
             console.log('create project error', action.payload)
+            return state;
+        case 'ADD_TASK':
+            console.log('task added');
+            return state;
+        case 'ADD_TASK_ERROR':
+            console.log('task creation error');
             return state;
         default:
             return state;

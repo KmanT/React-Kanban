@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signOut } from '../../store/actions/authActions';
 
+/**The links that are shown when a user is logged in. */
 const SignedInLinks = (props) => {
     return <ul className="right">
         <li><NavLink to='/create'>New Project</NavLink></li>
@@ -12,6 +13,7 @@ const SignedInLinks = (props) => {
     
 }
 
+/**Signs the user out. */
 const mapDispatchToProps = (dispatch) => {
     return {
         signOut: () => dispatch(signOut())
