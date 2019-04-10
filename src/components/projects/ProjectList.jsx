@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ProjectSummary from './ProjectSummary';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { openProject } from '../../store/actions/projectActions';
 import history from '../../history';
 
@@ -17,7 +16,7 @@ class ProjectList extends Component {
             <ul>
             { projects && projects.map(project => {
                 let projectLink = '/project/' + project.id;
-                return <li key={project.id} onClick={this.handleClick.bind(null, projectLink, project)}>
+                return <li className="project-item" key={project.id} onClick={this.handleClick.bind(null, projectLink, project)}>
                     <ProjectSummary project={project} key={project.id} content={project.content}/>
                 </li>
             })}

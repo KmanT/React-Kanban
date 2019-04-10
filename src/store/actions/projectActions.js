@@ -33,7 +33,7 @@ export const addTask = (task) => {
         const firestore = getFirestore();
         const profile = getState().firebase.profile;
         const project = getState().project.project;
-        //console.log(state.project);
+        console.log(task);
         const authorId = getState().firebase.auth.uid;
         firestore.collection('projects')
         .doc(project.id)
@@ -49,6 +49,7 @@ export const addTask = (task) => {
         }).then(() => {
             dispatch({type: 'ADD_TASK', payload: task})
         }).catch((err) => {
+            console.log(err)
             dispatch({type: 'ADD_TASK_ERROR', payload: err})
         })
     }

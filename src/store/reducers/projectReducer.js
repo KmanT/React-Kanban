@@ -16,7 +16,12 @@ const projectReducer = (state = initState, action) => {
             };
         case 'ADD_TASK':
             console.log('task added');
-            return state;
+            return {
+                project: {
+                    ...state.project,
+                    tasks: state.tasks.concat(action.payload)
+                }
+            };
         case 'ADD_TASK_ERROR':
             console.log('task creation error');
             return state;
