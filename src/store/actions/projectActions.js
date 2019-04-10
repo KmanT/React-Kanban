@@ -28,6 +28,14 @@ export const openProject = (project) => {
     }
 }
 
+export const deleteProject = (project) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore();
+        const profile = getState().firebase.profile;
+        const authorId = getState().firebase.auth.uid;
+    }
+}
+
 export const addTask = (task) => {
     return (dispatch, getState, { getFirebase, getFirestore}) => {
         const firestore = getFirestore();
@@ -50,7 +58,22 @@ export const addTask = (task) => {
             dispatch({type: 'ADD_TASK', payload: task})
         }).catch((err) => {
             console.log(err)
-            dispatch({type: 'ADD_TASK_ERROR', payload: err})
+            dispatch({type: 'ADD_TASK_ERROR', err})
         })
+    }
+}
+
+export const changeTaskStatus = (task) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore();
+        const profile = getState().firebase.profile;
+        const project = getState().project.project;
+
+    }
+}
+
+export const deleteTask = (task) => {
+    return () => {
+
     }
 }

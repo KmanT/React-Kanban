@@ -25,6 +25,14 @@ const ProjectDetails = (props) => {
       </div>
       <AddTask project={project}/>
       <TaskBoard project={project}/>
+      <div className="container section">
+        <button 
+          className="btn pink lighten-1 z-depth-0"
+          onClick={(e) => { 
+            if (window.confirm('Are you sure you wish to delete this project?')) this.deleteItem(e) 
+          }}
+          >Delete</button>
+      </div>
     </div>
     
   }
