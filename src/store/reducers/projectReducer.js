@@ -1,8 +1,4 @@
-const initState = {
-    projects: [
-        
-    ]
-};
+const initState = {};
 
 const projectReducer = (state = initState, action) => {
     switch (action.type) {
@@ -12,6 +8,12 @@ const projectReducer = (state = initState, action) => {
         case 'CREATE_PROJECT_ERROR':
             console.log('create project error', action.payload)
             return state;
+        case 'OPEN_PROJECT':
+            console.log('project opened', action.payload)
+            return {
+                ...state,
+                project: action.payload
+            };
         case 'ADD_TASK':
             console.log('task added');
             return state;

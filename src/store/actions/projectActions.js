@@ -10,7 +10,8 @@ export const createProject = (project) => {
             authorFirstName: profile.firstName,
             authorLastName: profile.lastName,
             authorId: authorId,
-            createdAt: new Date()
+            createdAt: new Date(),
+            tasks: []
         }).then(() => {
             dispatch({type: 'CREATE_PROJECT', payload: project
             })
@@ -21,19 +22,24 @@ export const createProject = (project) => {
     }
 }
 
-export const addTask = (state) => {
+export const openProject = (project) => {
+    return (dispatch) => {
+        dispatch({type: 'OPEN_PROJECT', payload: project});
+    }
+}
+
+export const addTask = (task) => {
     return (dispatch, getState, { getFirebase, getFirestore}) => {
         const firestore = getFirestore();
         const profile = getState().firebase.profile;
-        //const project = getState().firebase.project;
-        console.log(state.project);
+        const project = getState().project.project;
+        //console.log(state.project);
         const authorId = getState().firebase.auth.uid;
         firestore.collection('projects')
-        .doc(state.project.id)
+        .doc(project.id)
         .update({
             tasks: firestore.FieldValue.arrayUnion({
-                title: state.title,
-                content: state.content,
+                ...task,
                 authorFirstName: profile.firstName,
                 authorLastName: profile.lastName,
                 authorId: authorId,
@@ -41,7 +47,7 @@ export const addTask = (state) => {
                 status: 0
             })
         }).then(() => {
-            dispatch({type: 'ADD_TASK', payload: state})
+            dispatch({type: 'ADD_TASK', payload: task})
         }).catch((err) => {
             dispatch({type: 'ADD_TASK_ERROR', payload: err})
         })

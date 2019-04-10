@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+//import { Redirect } from 'react-router-dom';
 import { addTask } from '../../../store/actions/projectActions';
-import { compose } from 'redux';
+//import { compose } from 'redux';
 
 
 class AddTask extends Component { 
@@ -25,17 +25,17 @@ class AddTask extends Component {
     }
 
     render() {
-    
+    const { project } = this.props;
     return <div className="container section project-details">
         <form onSubmit={this.handleSubmit} className="white">
             <h5>Add new task</h5>
             <div className="input-field">
                 <label htmlFor="title">Title</label>
-                <input type="text" id="title"/>
+                <input type="text" id="title" onChange={this.handleChange}/>
             </div>
             <div className="input-field">
                 <label htmlFor="content">Description</label>
-                <input type="text" id="content"/>
+                <input type="text" id="content" onChange={this.handleChange}/>
             </div>
             
             <button className="btn-floating btn-large waves-effect waves-light pink">
@@ -63,4 +63,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default compose(connect(mapStateToProps, mapDispatchToProps))(AddTask);
+export default connect(mapStateToProps, mapDispatchToProps)(AddTask);
