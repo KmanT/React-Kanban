@@ -1,5 +1,6 @@
 import React from 'react';
 import AddTask from './tasks/AddTask';
+import TaskBoard from './tasks/TaskBoard';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
@@ -11,7 +12,8 @@ const ProjectDetails = (props) => {
   if (!auth.uid) return <Redirect to='/signin' />;
 
   if (project) {
-    return <div className="container section project-details">
+    return <div>
+      <div className="container section project-details">
         <div className="card z-depth-0">
             <span className="card-title">{project.title}</span>
             <p>{ project.content }</p>
@@ -19,9 +21,12 @@ const ProjectDetails = (props) => {
         <div className="card-action grey lighten-4 grey-text">
             <div>Posted by: {project.authorFirstName} {project.authorLastName}</div>
             <div>{moment(project.createdAt.toDate()).calendar()}</div>
-        </div>
-        <AddTask project={project}/>
+        </div>        
+      </div>
+      <AddTask project={project}/>
+      <TaskBoard project={project}/>
     </div>
+    
   }
     return <div/>
 }
