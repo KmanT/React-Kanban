@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TaskCard from './TaskCard';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
@@ -13,11 +14,7 @@ class TaskBoard extends Component {
         {/**Add function to print tasks with a status of "0" Include a button
             That increases the state by one */
             project.sortedTasks.todo.map(task => {
-              return <div className="row">
-                <p>{task.title}</p>
-                <p>{task.content}</p>
-                <button className="btn pink lighten-1 z-depth-0">Next Phase</button>
-              </div>
+              return <TaskCard task={task} />
             })
         }
 
@@ -27,19 +24,15 @@ class TaskBoard extends Component {
         {/**Add function to print tasks with a status of "1" Include a button
             That increases the state by one */
             project.sortedTasks.wip.map(task => {
-              return <div className="row">
-                <button className="btn pink lighten-1 z-depth-0">Next Phase</button>
-              </div>
+              return <TaskCard task={task} />
             })
         }
       </div>
       <div className="col s4" id="done">
         <div className="row center-align"><span className="flow-text">DONE</span></div>
         {/**Add function to print tasks with a status of "2" No need for btn*/
-          project.sortedTasks.todo.map(task => {
-            return <div className="row">
-              
-            </div>
+          project.sortedTasks.done.map(task => {
+            return <TaskCard task={task} />
           })
         }
       </div>
