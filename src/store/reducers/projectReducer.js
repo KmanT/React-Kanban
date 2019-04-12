@@ -19,7 +19,7 @@ const projectReducer = (state = initState, action) => {
             return {
                 project: {
                     ...state.project,
-                    tasks: state.tasks.concat(action.payload)
+                    tasks: state.project.tasks.concat(action.payload)
                 }
             };
         case 'ADD_TASK_ERROR':

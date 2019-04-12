@@ -13,8 +13,7 @@ export const createProject = (project) => {
             createdAt: new Date(),
             tasks: []
         }).then(() => {
-            dispatch({type: 'CREATE_PROJECT', payload: project
-            })
+            dispatch({type: 'CREATE_PROJECT', payload: project})
         }).catch((err) => {
             dispatch({type: 'CREATE_PROJECT_ERROR', payload: err})
         })
