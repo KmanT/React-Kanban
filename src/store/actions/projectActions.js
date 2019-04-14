@@ -88,7 +88,7 @@ export const changeTaskStatus = (task, newStatus) => {
         .doc(project.id)
         .set({
             ...project,
-            tasks: taskList
+            tasks: taskList.slice()
         }).then(() => {
             dispatch({type: 'UPDATE_TASK', payload: taskList})
         }).catch((err) => {

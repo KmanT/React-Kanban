@@ -30,7 +30,7 @@ const projectReducer = (state = initState, action) => {
             return {
                 project: {
                     ...state.project,
-                    tasks: {...action.payload}
+                    tasks: action.payload
                 }
             }
         case 'UPDATE_TASK_ERROR':
