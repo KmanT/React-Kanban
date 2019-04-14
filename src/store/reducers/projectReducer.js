@@ -25,6 +25,17 @@ const projectReducer = (state = initState, action) => {
         case 'ADD_TASK_ERROR':
             console.log('task creation error');
             return state;
+        case 'UPDATE_TASK':
+            console.log('task updated');
+            return {
+                project: {
+                    ...state.project,
+                    tasks: {...action.payload}
+                }
+            }
+        case 'UPDATE_TASK_ERROR':
+            console.log('task failed ot update')
+            return state;
         default:
             return state;
     }

@@ -6,15 +6,21 @@ import { firestoreConnect } from 'react-redux-firebase';
 
 /**Look at ProjectList for a hint on what needs to be done. */
 class TaskBoard extends Component {
+  
   render() {
     const { project } = this.props;
+    console.log(project);
     return <div className="container section row" id="task-table">
       <div className="col s4" id="todo">
         <div className="row center-align"><span className="flow-text">TODO</span></div>
         {/**Add function to print tasks with a status of "0" Include a button
             That increases the state by one */
             project.sortedTasks.todo.map(task => {
-              return <TaskCard task={task} />
+              return <TaskCard 
+                task={task} 
+                index={task.index}
+                projectId={task.projectId}
+              />
             })
         }
 
@@ -24,7 +30,11 @@ class TaskBoard extends Component {
         {/**Add function to print tasks with a status of "1" Include a button
             That increases the state by one */
             project.sortedTasks.wip.map(task => {
-              return <TaskCard task={task} />
+              return <TaskCard 
+                task={task}
+                index={task.index}
+                projectId={task.projectId}
+              />
             })
         }
       </div>
@@ -32,7 +42,11 @@ class TaskBoard extends Component {
         <div className="row center-align"><span className="flow-text">DONE</span></div>
         {/**Add function to print tasks with a status of "2" No need for btn*/
           project.sortedTasks.done.map(task => {
-            return <TaskCard task={task} />
+            return <TaskCard
+              task={task}
+              index={task.index}
+              projectId={task.projectId}
+            />
           })
         }
       </div>
@@ -41,7 +55,23 @@ class TaskBoard extends Component {
 }
 
 const createTaskListByType= (statusNum, project) => {
-  return project.tasks.filter(task => task.status === statusNum);
+  //return project.tasks.filter(task => task.status === statusNum);
+  var i = 0;
+  var taskArr = [];
+  var projectId = project.id;
+  console.log(project);
+  project.tasks.forEach((task) => {
+    if (task.status === statusNum) {
+      taskArr.push({
+        ...task,
+        index: i,
+        projectId: projectId
+      })
+    }
+    i++;
+  })
+  console.log(taskArr);
+  return taskArr;
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -61,7 +91,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([{
-    collection: 'projects'
-  }])
+  firestoreConnect([{collection: 'projects'}])
 )(TaskBoard);
